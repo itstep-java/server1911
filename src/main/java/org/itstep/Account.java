@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
     private Integer number;
+
     private Long balance = 0L;
+
     private String owner;
 
     public Account(Integer number, String owner) {
