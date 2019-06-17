@@ -6,7 +6,7 @@ import org.itstep.OperationType;
 import java.io.File;
 import java.io.IOException;
 
-public class OperationStorage extends AbstractObjectStorage {
+public class OperationStorage extends AbstractObjectStorage<Operation> {
 
     OperationStorage(File file) {
         super(file);
