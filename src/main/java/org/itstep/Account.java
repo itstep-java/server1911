@@ -43,4 +43,9 @@ public class Account implements Serializable {
     public boolean equals(Object obj) {
         return obj instanceof Account && ((Account) obj).number.equals(number);
     }
+
+    @Override
+    public String toString() {
+        return number + ": " + balance + " руб. (" + owner + ")";
+    }
 }

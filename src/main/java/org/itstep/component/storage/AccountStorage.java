@@ -5,6 +5,7 @@ import org.itstep.Account;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class AccountStorage extends AbstractObjectStorage<Account> {
     private static final String locker = "locker";
@@ -24,6 +25,14 @@ public class AccountStorage extends AbstractObjectStorage<Account> {
 
     public Account fetch(Integer number) throws IOException, ClassNotFoundException {
         synchronized (locker) {
+//            Predicate<Account> predicate = new Predicate<Account>() {
+//                @Override
+//                public boolean test(Account account) {
+//                    return account.getNumber().equals(number);
+//                }
+//            };
+//
+//            return read(predicate);
             return read(account -> account.getNumber().equals(number));
         }
     }
