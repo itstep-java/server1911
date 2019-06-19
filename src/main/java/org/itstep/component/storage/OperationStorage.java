@@ -15,7 +15,7 @@ public class OperationStorage extends AbstractObjectStorage<Operation> {
         super(file);
     }
 
-    public Operation create1accincl(
+    public Operation create(
             String frstaccnum,
             Long amount,
             OperationType type
@@ -27,7 +27,7 @@ public class OperationStorage extends AbstractObjectStorage<Operation> {
             return operation;
         }
     }
-    public Operation create2accincl(
+    public Operation create(
             String frstaccnum,
             Long amount,
             OperationType type,
@@ -59,8 +59,6 @@ public class OperationStorage extends AbstractObjectStorage<Operation> {
             return readAll();
         }
     }
-
-
 
     private Integer getNextNumber() throws IOException, ClassNotFoundException {
         int number = 0;
