@@ -5,7 +5,6 @@ import org.itstep.Account;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.function.Predicate;
 
 public class AccountStorage extends AbstractObjectStorage<Account> {
     private static final String locker = "locker";

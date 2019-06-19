@@ -1,24 +1,24 @@
 package org.itstep;
 
-import org.itstep.component.storage.AccountStorage;
-
 import java.io.File;
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        AccountStorage storage = new AccountStorage(getFile());
-        Account account = storage.create("Keanu Reeves");
-        Integer number = account.getNumber();
+    public static void main(String[] args) throws IOException {
+        ServerSocket server = new ServerSocket(9000);
+        System.out.println("Сервер запущен");
 
-        account.setBalance(100500L);
-        storage.update(account);
-
-        account = storage.fetch(number);
-        System.out.println(account);
+        while (true) {
+            Socket client = server.accept();
+            System.out.println("Принято соединение");
+            Thread thread = new Thread(new ClientHandler(client));
+            thread.start();
+        }
     }
 
-    public static File getFile() throws IOException {
+    public static File getAccountsFile() throws IOException {
         File file = new File(
             System.getProperty("user.dir")
                 + File.separator + "data"
