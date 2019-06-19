@@ -8,20 +8,23 @@ public class Operation {
     private OperationType type;
     private GregorianCalendar date;
     private String recipientNumber = null;
+    private Integer operationnumber;
 
-    public Operation(String accountNumber, Long amount, OperationType type) {
+    public Operation(String accountNumber, Long amount, OperationType type, Integer opernum) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.type = type;
         this.date = new GregorianCalendar();
+        this.operationnumber = opernum;
     }
 
-    public Operation(String accountNumber, Long amount, OperationType type, String recipientNumber) {
+    public Operation(String accountNumber, Long amount, OperationType type, String recipientNumber, Integer opernum) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.type = type;
         this.date = new GregorianCalendar();
         this.recipientNumber = recipientNumber;
+        this.operationnumber = opernum;
     }
 
     public String getAccountNumber() {
@@ -42,5 +45,9 @@ public class Operation {
 
     public String getRecipientNumber() {
         return recipientNumber;
+    }
+
+    public Integer getOperationnumber() {
+        return operationnumber;
     }
 }
