@@ -3,7 +3,7 @@ package org.itstep.component.storage;
 import org.itstep.Operation;
 import org.itstep.OperationType;
 import java.io.File;
-import java.io.IOExceptio
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class OperationStorage extends AbstractObjectStorage<Operation> {
