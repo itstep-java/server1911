@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class OperationStorage extends AbstractObjectStorage<Operation> {
+
+    private static final String locker = "locker";
+
     public OperationStorage(File file) {
         super(file);
     }
@@ -20,5 +23,13 @@ public class OperationStorage extends AbstractObjectStorage<Operation> {
 
     public Operation create(String accountNumber, Long amount, OperationType type) throws IOException {
         return create(accountNumber, amount, type, null);
+    }
+
+    public Operation fetch (Integer num) throws IOException, ClassNotFoundException {
+            synchronized (locker) {
+
+                return read(operation -> Integer.parseInt(operation.getAccountNumber()) == num);
+
+            }
     }
 }
