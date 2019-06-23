@@ -5,8 +5,14 @@ import org.itstep.OperationType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class OperationStorage extends AbstractObjectStorage<Operation> {
+
+    private static final String locker = "locker";
+
     public OperationStorage(File file) {
         super(file);
     }
@@ -20,5 +26,17 @@ public class OperationStorage extends AbstractObjectStorage<Operation> {
 
     public Operation create(String accountNumber, Long amount, OperationType type) throws IOException {
         return create(accountNumber, amount, type, null);
+    }
+
+    public List<Operation> fetch(Integer num) throws IOException, ClassNotFoundException {
+        synchronized (locker) {
+
+            List<Operation> list = new ArrayList<>();
+
+            list.add(read(operation -> Integer.parseInt(operation.getAccountNumber()) == num));
+
+            return list;
+
+        }
     }
 }
