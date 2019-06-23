@@ -20,18 +20,20 @@ abstract class AbstractObjectStorage<T> {
     private class ObjectFileReader<E> {
         @SuppressWarnings("unchecked")
         E read(Predicate<E> predicate) throws IOException, ClassNotFoundException {
-            try (ObjectInputStream inputStream = getInputStream()) {
-                while (true) {
-                    E object = (E) inputStream.readObject();
+            E result = null;
+                try (ObjectInputStream inputStream = getInputStream()) {
 
-                    if (predicate.test(object)) {
-                        return object;
+                    while (true) {
+                        E object = (E) inputStream.readObject();
+
+                        if (predicate.test(object)) {
+                            result =  object;
+                        }
                     }
+                } catch (EOFException e) {
                 }
-            } catch (EOFException e) {
-            }
 
-            return null;
+            return result;
         }
 
         @SuppressWarnings("unchecked")
