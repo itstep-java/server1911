@@ -7,26 +7,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class OperationStorage extends AbstractObjectStorage<Operation> {
-
-    OperationStorage(File file) {
+    public OperationStorage(File file) {
         super(file);
     }
 
-    public Operation create(String accountNumber, Long amount, OperationType type)
-            throws IOException {
-        synchronized (OperationStorage.class) {
-            Operation operation = create(accountNumber, amount, type, null);
-            write(operation, true);
-            return operation;
-        }
+    public Operation create(String accountNumber, Long amount, OperationType type, String recipientNumber) throws IOException {
+        Operation operation = new Operation(accountNumber, amount, type);
+        write(operation, true);
+
+        return operation;
     }
 
-    public Operation create(String accountNumber, Long amount, OperationType type, String recipientNumber)
-            throws IOException {
-        synchronized (OperationStorage.class) {
-            Operation operation = new Operation(accountNumber, amount, type, recipientNumber);
-            write(operation, true);
-            return operation;
-        }
+    public Operation create(String accountNumber, Long amount, OperationType type) throws IOException {
+        return create(accountNumber, amount, type, null);
     }
 }
